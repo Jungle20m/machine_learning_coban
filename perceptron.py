@@ -24,19 +24,36 @@ def loss_func(J):
 			loss += j
 	return loss
 
-
 def perceptron(X, labels, eta):
 	w = init_w()
-	while True:
+	for k in range(40):
 		J = -labels*X.dot(w)
 		if loss_func(J) == 0:
 			return w
 		for i in range(2*N):
+			print(i)
 			w = w + eta*labels[i]*X[i,:]
 
 w = perceptron(X, labels, 1)
 
+# w = init_w()
 
-# plt.plot(X1[:, 0], X1[:, 1], "P")
-# plt.plot(X2[:, 0], X2[:, 1], "x")
-# plt.show()
+# w = w + labels[0]*X[0, :]
+print(w)
+# print(-labels*X.dot(w))
+
+
+if w[2] != 0:
+	x = np.array((0, 10))
+	y = -(w[1]/w[2])*x - w[0]/w[2]
+else:
+	x = [-w[0]/w[1], -w[0]/w[1]]
+	y = [0, 10]
+
+
+print(y)
+
+plt.plot(X1[:, 0], X1[:, 1], "P")
+plt.plot(X2[:, 0], X2[:, 1], "x")
+plt.plot(x, y)
+plt.show()
